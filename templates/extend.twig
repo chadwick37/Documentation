@@ -1,0 +1,42 @@
+{% extends "layout.twig" %}
+
+{# Sample template of blocks you would normally replace #}
+
+{% block page_title %}Documentation{% endblock %}
+
+{% block description %}Quick documentation framework for your app{% endblock %}
+
+{% block projectname %}Project name{% endblock %}
+
+{% block loggedin %}Logged in as <a href="#" class="navbar-link">Username</a>{% endblock %}
+
+{% block navbar %}
+	<li class="active"><a href="#">Home</a></li>
+	<li><a href="#about">About</a></li>
+	<li><a href="#contact">Contact</a></li>
+{% endblock %}
+
+{% block navlist %}
+	<li class="nav-header">Sidebar</li>
+	<li class="active"><a href="#">Link</a></li>
+	<li><a href="#">Link</a></li>
+	<li><a href="#">Link</a></li>
+	<li><a href="#">Link</a></li>
+	<li class="nav-header">Sidebar</li>
+	<li><a href="#">Link</a></li>
+	<li><a href="#">Link</a></li>
+	<li><a href="#">Link</a></li>
+	<li><a href="#">Link</a></li>
+	<li><a href="#">Link</a></li>
+	<li><a href="#">Link</a></li>
+	<li class="nav-header">Sidebar</li>
+	<li><a href="#">Link</a></li>
+	<li><a href="#">Link</a></li>
+	<li><a href="#">Link</a></li>
+{% endblock %}
+
+{% block content %}{% endblock %}
+
+{% block footer %}
+	<p>&copy; EverBaron 2013</p>
+{% endblock %}
