@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>{% block page_title %} {% endblock %}</title>
+		<meta charset="utf8" />
+		<link href="{{ doc_root }}/themes/advanced-styles.css" media="screen" rel="stylesheet" type="text/css" />
+		<link href="{{ doc_root }}/themes/style-main.css" media="screen" rel="stylesheet" type="text/css" />
+		<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+	</head>
+	<body>
+		<div id="content">
+			<div class="container-fluid">
+			{% block content %} {% endblock %}
+			</div>
+		</div>
+	</body>
+	<footer>
+		{% block footer %}
+			<small>by <a href="http://helpyousponsor.com">HelpYouSponsor</a></small>
+        {% endblock %}
+	</footer>
+</html>
