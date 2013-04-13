@@ -16,6 +16,7 @@ require_once 'Paris/idiorm.php';
 require_once 'Paris/paris.php';
 
 // Config
+require_once('config.php');
 ORM::configure('mysql:host='.SQLHOST.';dbname='.SQLDB.'');
 ORM::configure('username', SQLUSER);
 ORM::configure('password', SQLPASS);
