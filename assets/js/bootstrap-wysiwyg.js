@@ -41,6 +41,7 @@
 				document.execCommand(command, 0, args);
 				updateToolbar();
 			},
+/*
 			bindHotkeys = function (hotKeys) {
 				$.each(hotKeys, function (hotkey, command) {
 					editor.keydown(hotkey, function (e) {
@@ -57,6 +58,7 @@
 					});
 				});
 			},
+*/
 			getCurrentRange = function () {
 				var sel = window.getSelection();
 				if (sel.getRangeAt && sel.rangeCount) {
@@ -150,7 +152,7 @@
 					});
 			};
 		options = $.extend({}, $.fn.wysiwyg.defaults, userOptions);
-		bindHotkeys(options.hotKeys);
+	//	bindHotkeys(options.hotKeys);
 		initFileDrops();
 		bindToolbar($(options.toolbarSelector), options);
 		editor.attr('contenteditable', true)

@@ -1,4 +1,4 @@
-Documentation
+doc.umentation
 =============
 
 # STILL IN DEVELOPMENT - feel free to fork and help
@@ -14,6 +14,7 @@ Most of the setup is already done for you.
 * Update config.php with your database settings
 * Go to http://yourwebsite.com/add to create content
 
-## Plans
+## To Do
 
 Add user authentication to protect adding and updating content
+Add parents and sorting/ordering
