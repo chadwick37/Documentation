@@ -36,3 +36,7 @@ div[data-role="editor-toolbar"] {
 .dropdown-menu a {
   cursor: pointer;
 }
+
+.child {
+	margin-left: 20px;
+}

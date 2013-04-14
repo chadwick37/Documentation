@@ -23,6 +23,7 @@ ORM::configure('password', SQLPASS);
 ORM::configure('logging', true);
 
 require('models/Articles.php');
+require('Slim/extras/Views/Twig.php');
 
 $app = new \Slim\Slim(array(
 	'view' => new \Slim\Extras\Views\Twig()
@@ -30,16 +31,63 @@ $app = new \Slim\Slim(array(
 
 $app->config('debug', true);
 
+
+function getOrderedArticles($articles) {
+	// build the parent array
+	$parents = array();
+	foreach ($articles as $article) {
+		$article = $article->as_array();
+		if ($article['parent_id'] == 0) {
+			$parents[$article['id']] = $article;
+		}
+	}
+	
+	foreach ($parents as $k => $v) {
+		foreach ($articles as $article) {
+			$article = $article->as_array();
+			if ($article['parent_id'] == $k) {
+				$parents[$k]['children'][] = $article;
+			}
+		}
+	}
+	
+	return $parents;	
+}
+
+function slug($title) {
+	$slug = str_replace(" ", "_", strtolower($title));
+	$testSlug = Model::factory('Articles')
+		->where('slug', $slug)
+		->find_one();
+	$i = 0;
+	if ($testSlug) {
+		$i++;
+		$newTitle = ''.$title.' '.$i.'';
+		$slug = slug($newTitle);
+	}
+	
+	return $slug;
+}
+
+
 // home
 $app->get('/', function() use ($app) {
-	$articles = Model::factory('Articles')->find_many();
+	$articles = Model::factory('Articles')
+		->order_by_asc('order')
+		->find_many();
 	
-	return $app->render('home.twig', array('doc_root' => BASEDIR, 'articles' => $articles));
+	$parents = getOrderedArticles($articles);
+	
+	return $app->render('home.twig', array('doc_root' => BASEDIR, 'parents' => $parents));
 });
 
 // read individual article
 $app->get('/read/:slug', function($slug) use ($app) {
-	$articles = Model::factory('Articles')->find_many();
+	$articles = Model::factory('Articles')
+		->order_by_asc('order')
+		->find_many();
+	
+	$parents = getOrderedArticles($articles);
 
 	$article = Model::factory('Articles')
 		->where('slug', $slug)
@@ -49,30 +97,48 @@ $app->get('/read/:slug', function($slug) use ($app) {
 	   $app->notFound();
 	}
 	
-	return $app->render('read.twig', array('doc_root' => BASEDIR, 'article' => $article, 'articles' => $articles));
+	return $app->render('read.twig', array('doc_root' => BASEDIR, 'article' => $article, 'parents' => $parents));
 });
 
 // Admin Home.
 $app->get('/admin', function() use ($app) {
 	$articles = Model::factory('Articles')
-		->order_by_desc('order')
+		->order_by_asc('order')
 		->find_many();
 	
-	return $app->render('admin_home.twig', array('doc_root' => BASEDIR, 'articles' => $articles));
+	$parents = getOrderedArticles($articles);
+	
+	return $app->render('admin_home.twig', array('doc_root' => BASEDIR, 'parents' => $parents));
+});
+
+$app->post('/admin/reorder', function() use ($app) {
+	$ids = $app->request()->post('item');
+	
+	foreach($ids as $key=>$value) {
+		echo "Key: $key, Value: $value <br>";
+		$article = Model::factory('Articles')->find_one($value);
+		$article->order	= $key;
+		$article->save();
+    }
 });
  
 // Admin Add.
 $app->get('/admin/add/:parent_id', function($parent_id) use ($app) {
-	$articles = Model::factory('Articles')->find_many();
+	$articles = Model::factory('Articles')
+		->order_by_asc('order')
+		->find_many();
+	
+	$parents = getOrderedArticles($articles);
 
-	return $app->render('article_form.twig', array('doc_root' => BASEDIR, 'articles' => $articles, 'parent_id' => $parent_id));
+	return $app->render('article_form.twig', array('doc_root' => BASEDIR, 'parents' => $parents, 'parent_id' => $parent_id));
 });   
  
 // Admin Add - POST.
 $app->post('/admin/add/:parent_id', function($parent_id) use ($app) {
-	$article = Model::factory('Articles')->create();
-	$slug = str_replace(" ", "_", strtolower($app->request()->post('title')));
+		
+	$slug = slug($app->request()->post('title'));
 	
+	$article = Model::factory('Articles')->create();
 	$article->title		= $app->request()->post('title');
 	$article->slug		= $slug;
 	$article->content	= trim($app->request()->post('content'));
@@ -86,7 +152,12 @@ $app->post('/admin/add/:parent_id', function($parent_id) use ($app) {
  
 // Admin Edit.
 $app->get('/admin/edit/(:id)', function($id) use ($app) {
-	$articles = Model::factory('Articles')->find_many();
+	$articles = Model::factory('Articles')
+		->order_by_asc('order')
+		->find_many();
+	
+	$parents = getOrderedArticles($articles);
+
 	$article = Model::factory('Articles')
 		->where('id', $id)
 		->find_one();
@@ -94,7 +165,7 @@ $app->get('/admin/edit/(:id)', function($id) use ($app) {
 	if (! $article instanceof Articles) {
 	   $app->notFound();
 	}
-	return $app->render('edit.twig', array('doc_root' => BASEDIR, 'article' => $article, 'articles' => $articles));
+	return $app->render('edit.twig', array('doc_root' => BASEDIR, 'article' => $article, 'parents' => $parents));
 });
  
 // Admin Edit - POST.
@@ -103,7 +174,7 @@ $app->post('/admin/edit/(:id)', function($id) use ($app) {
 	if (! $article instanceof Articles) {
 	   $app->notFound();
 	}
-	$slug = str_replace(" ", "_", strtolower($app->request()->post('title')));
+	$slug = slug($app->request()->post('title'));
 	
 	$article->title		= $app->request()->post('title');
 	$article->slug		= $slug;
