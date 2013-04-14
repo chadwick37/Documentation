@@ -1,7 +1,7 @@
 Documentation
 =============
 
-# STILL IN DEVELOPMENT - feel free to clone and help
+# STILL IN DEVELOPMENT - feel free to fork and help
 
 A simple application for building documentation for your app. Uses [Slim](http://www.slimframework.com/), [Paris/Idiorm](http://j4mie.github.io/idiormandparis/), [Twig](http://twig.sensiolabs.org/), and [Bootstrap v2.3.1](http://twitter.github.com/bootstrap).
 

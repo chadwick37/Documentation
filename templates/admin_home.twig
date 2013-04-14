@@ -1,0 +1,38 @@
+{% extends "layout.twig" %}
+
+{% block page_title %}Documentation - Admin{% endblock %}
+
+{% block navbar %}
+	{% include 'navbar.twig' %}
+{% endblock %}
+
+{% block navlist %}
+	{% include 'navlist.twig' %}
+{% endblock %}
+
+{% block content %}
+{% if articles %}
+<table class="table table-striped table-hover table-bordered">
+	<thead>
+		<tr>
+			<th>Title</th>
+			<th>Slug</th>
+			<th>Last Edited</th>
+			<th>Manage</th>
+		</tr>
+	</thead>
+	<tbody>
+	{% for article in articles %}
+		<tr>
+			<td><a href="{{ doc_root }}/read/{{ article.slug }}">{{ article.title }}</a></td>
+			<td>{{ article.slug }}</td>
+			<td>{{ article.timestamp }}</td>
+			<td><a href="{{ doc_root }}/read/{{ article.slug }}">View</a> / <a href="{{ doc_root }}/admin/edit/{{ article.id }}">Edit</a> / <a href="{{ doc_root }}/admin/delete/{{ article.id }}">Delete</a></td>
+		</tr>
+	{% endfor %}
+	</tbody>
+</table>
+{% else %}
+<p>There are currently no articles.</p>
+{% endif %}
+{% endblock %}

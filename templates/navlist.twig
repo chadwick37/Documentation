@@ -1,0 +1,6 @@
+{% if articles %}
+	<li class="nav-header">Features</li>
+	{% for article in articles %}
+		<li><a href="{{ doc_root }}/read/{{ article.slug }}">{{ article.title }}</a></li>
+	{% endfor %}
+{% endif %}

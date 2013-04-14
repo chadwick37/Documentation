@@ -1,0 +1,26 @@
+{% extends "layout.twig" %}
+
+{% block page_title %}Doc.umentation - Edit{% endblock %}
+
+{% block navbar %}
+	{% include 'navbar.twig' %}
+{% endblock %}
+
+{% block navlist %}
+	{% include 'navlist.twig' %}
+{% endblock %}
+
+{% block content %}
+<form method="post" action="{{ doc_root }}/admin/edit/{{ article.id }}"
+	<fieldset>
+		<legend>Edit Article</legend>
+			<label>Title</label>
+			<input class="input-xxlarge" type="text" name="title" value="{{ article.title }}" />
+			<label>Content</label>
+			<textarea class="input-xxlarge" rows="10" name="content">{{ article.content }}</textarea>
+			<div class="form-actions">
+		    <button type="submit" class="btn btn-primary">Submit</button>
+		    </div>
+	</fieldset>
+</form>
+{% endblock %}

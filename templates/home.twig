@@ -1,0 +1,19 @@
+{% extends "layout.twig" %}
+
+{% block page_title %}Doc.umentation - Home{% endblock %}
+
+{% block navbar %}
+	{% include 'navbar.twig' %}
+{% endblock %}
+
+{% block navlist %}
+	{% include 'navlist.twig' %}
+{% endblock %}
+
+{% block content %}
+<div class="hero-unit">
+<h1>Documentation</h1>
+	<p class="lead">A super simple app for documenting your app. Built with the Slim microframework, Paris and Idiorm (a super simple ORM), the Twig template engine, and the Twitter Bootstrap front end framework.</p>
+	<p>Why build Doc.umentation? Because I needed something quick and simple. I didn't need a full blown wiki and I didn't want to hack wordpress into doing what I wanted.</p>
+</div>
+{% endblock %}
