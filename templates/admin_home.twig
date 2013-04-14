@@ -1,6 +1,6 @@
 {% extends "layout.twig" %}
 
-{% block page_title %}Documentation - Admin{% endblock %}
+{% block page_title %}doc.umentation - Admin{% endblock %}
 
 {% block navbar %}
 	{% include 'navbar.twig' %}
@@ -27,7 +27,7 @@
 			<td><a href="{{ doc_root }}/read/{{ article.slug }}">{{ article.title }}</a></td>
 			<td>{{ article.slug }}</td>
 			<td>{{ article.timestamp }}</td>
-			<td><a href="{{ doc_root }}/read/{{ article.slug }}">View</a> / <a href="{{ doc_root }}/admin/edit/{{ article.id }}">Edit</a> / <a href="{{ doc_root }}/admin/delete/{{ article.id }}">Delete</a></td>
+			<td><a href="{{ doc_root }}/read/{{ article.slug }}">View</a> / <a href="{{ doc_root }}/admin/edit/{{ article.id }}">Edit</a> / <a href="{{ doc_root }}/admin/add/{{ article.id }}">Add Child</a> / <a href="{{ doc_root }}/admin/delete/{{ article.id }}">Delete</a></td>
 		</tr>
 	{% endfor %}
 	</tbody>

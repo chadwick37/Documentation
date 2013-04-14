@@ -62,14 +62,14 @@ $app->get('/admin', function() use ($app) {
 });
  
 // Admin Add.
-$app->get('/admin/add', function() use ($app) {
+$app->get('/admin/add/:parent_id', function($parent_id) use ($app) {
 	$articles = Model::factory('Articles')->find_many();
 
-	return $app->render('article_form.twig', array('doc_root' => BASEDIR, 'articles' => $articles));
+	return $app->render('article_form.twig', array('doc_root' => BASEDIR, 'articles' => $articles, 'parent_id' => $parent_id));
 });   
  
 // Admin Add - POST.
-$app->post('/admin/add', function() use ($app) {
+$app->post('/admin/add/:parent_id', function($parent_id) use ($app) {
 	$article = Model::factory('Articles')->create();
 	$slug = str_replace(" ", "_", strtolower($app->request()->post('title')));
 	
@@ -77,6 +77,8 @@ $app->post('/admin/add', function() use ($app) {
 	$article->slug		= $slug;
 	$article->content	= trim($app->request()->post('content'));
 	$article->timestamp = date('Y-m-d H:i:s');
+	$article->parent_id = $parent_id;
+
 	$article->save();
 	
 	$app->redirect(''.BASEDIR.'/admin');

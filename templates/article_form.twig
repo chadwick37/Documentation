@@ -1,6 +1,6 @@
 {% extends "layout.twig" %}
 
-{% block page_title %}Doc.umentation - Add Article{% endblock %}
+{% block page_title %}doc.umentation - Add Article{% endblock %}
 
 {% block navbar %}
 	{% include 'navbar.twig' %}
@@ -23,9 +23,13 @@ $(document).ready(function() {
 	
 });
 </script>
-<form id="add-article" method="post" action="{{ doc_root }}/admin/add">
+<form id="add-article" method="post" action="{{ doc_root }}/admin/add/{{ parent_id }}">
   <fieldset>
+  	{% if parent_id == 0 %}
     <legend>Add Article</legend>
+    {% else %}
+    <legend>Add Child Article</legend>
+    {% endif %}
 	    <label>Title</label>
 	    <input class="input-xxlarge" type="text" name="title" placeholder="add title">
 	    <label>Content</label>    

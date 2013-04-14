@@ -16,5 +16,5 @@ Most of the setup is already done for you.
 
 ## To Do
 
-Add user authentication to protect adding and updating content
-Add parents and sorting/ordering
+* Add user authentication to protect adding and updating content
+* Add parents and sorting/ordering
