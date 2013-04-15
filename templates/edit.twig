@@ -28,6 +28,8 @@ $(document).ready(function() {
     <legend>Add Article</legend>
 	    <label>Title</label>
 	    <input class="input-xxlarge" type="text" name="title" value="{{ article.title }}">
+	    <label>Slug</label>
+	    <input class="input-xxlarge" type="text" name="slug" placeholder="{{ article.slug }}">
 	    <label>Content</label>    
 	    <input id="hide-content" type="hidden" name="content" value="" />
   </fieldset>

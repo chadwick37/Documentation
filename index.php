@@ -78,7 +78,15 @@ $app->get('/', function() use ($app) {
 	
 	$parents = getOrderedArticles($articles);
 	
-	return $app->render('home.twig', array('doc_root' => BASEDIR, 'parents' => $parents));
+	$home = Model::factory('Articles')
+		->where('slug', 'home')
+		->find_one();
+	
+	if ($home) {
+		return $app->render('read.twig', array('doc_root' => BASEDIR, 'article' => $home, 'parents' => $parents));
+	} else {
+		return $app->render('home.twig', array('doc_root' => BASEDIR, 'parents' => $parents));
+	}
 });
 
 // read individual article
@@ -174,10 +182,13 @@ $app->post('/admin/edit/(:id)', function($id) use ($app) {
 	if (! $article instanceof Articles) {
 	   $app->notFound();
 	}
-	$slug = slug($app->request()->post('title'));
+	
+	$slug = $app->request()->post('slug'); 
+	if (!empty($slug)) {
+		$article->slug = $slug;
+	}
 	
 	$article->title		= $app->request()->post('title');
-	$article->slug		= $slug;
 	$article->content	= trim($app->request()->post('content'));
 	$article->timestamp = date('Y-m-d H:i:s');
 	$article->save();
