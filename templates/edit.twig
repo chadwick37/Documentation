@@ -85,8 +85,14 @@ $(document).ready(function() {
 		      <div class="btn-group">
 		        <a class="btn" data-edit="undo" title="Undo (Ctrl/Cmd+Z)"><i class="icon-undo"></i></a>
 		        <a class="btn" data-edit="redo" title="Redo (Ctrl/Cmd+Y)"><i class="icon-repeat"></i></a>
+		        
+		        <a class="btn dropdown-toggle" data-toggle="dropdown" title="Insert HTML">HTML</a>
+				    <div class="dropdown-menu input-append">
+					    <input class="" placeholder="Insert HTML" type="text" data-edit="inserthtml"/>
+					    <button class="btn" type="button">Insert</button>
+				    </div>
 		      </div>
-{# 		      <input type="text" data-edit="inserttext" id="voiceBtn" x-webkit-speech=""> #}
+		      <input type="text" data-edit="inserttext" id="voiceBtn" x-webkit-speech="">
 		    </div>
 		
 		    <div id="editor">
