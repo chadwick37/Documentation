@@ -30,6 +30,7 @@ $(document).ready(function() {
 {% block content %}
 {% if parents %}
 <h1>Manage Articles</h1>
+<div class="span9">
 <ul id="item_list" class="unstyled">
 {% for p in parents %}
 	<li id="item_{{ p.id }}">
@@ -71,6 +72,7 @@ $(document).ready(function() {
 	</li>
 {% endfor %}
 </ul>
+</div>
 {% else %}
 <p>There are currently no articles.</p>
 {% endif %}
