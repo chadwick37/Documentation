@@ -41,7 +41,6 @@
     <!--[if lt IE 9]>
       <script src="{{ doc_root }}/assets/js/html5shiv.js"></script>
     <![endif]-->
-
     <link rel="shortcut icon" href="{{ doc_root }}/assets/ico/favicon.ico">
   {% endblock %}
   </head>
@@ -59,7 +58,13 @@
           <a class="brand" href="{{ doc_root }}">{% block projectname %}doc.umentation{% endblock %}</a>
           <div class="nav-collapse collapse">
             <p class="navbar-text pull-right">
-              {% block loggedin %}Logged in as <a href="#" class="navbar-link">Username</a>{% endblock %}
+              {% block loggedin %}
+              {% if user %}
+              	Logged in as {{ user }} | <a class="navbar-link" href="{{ doc_root }}/admin/logout">Logout</a>
+              {% else %}
+              	<a class="navbar-link" href="{{ doc_root }}/admin/login">Log In</a>
+              {% endif %}
+              {% endblock %}
             </p>
             <ul class="nav">
             	{% block navbar %}
@@ -74,7 +79,7 @@
     </div>
 
     <div class="container-fluid">
-      <div class="row-fluid">
+      <div class="row-fluid main-content-area">
         <div class="span3">
           <div class="well sidebar-nav span3 affix">
             <ul class="nav nav-list">
@@ -148,7 +153,7 @@
 
       <footer>
       	{% block footer %}
-        <p>&copy; EverBaron 2013</p>
+        <p><small>&copy; <a href="http://doc.umentation.com">doc.umentation</a> another EverBaron project.</small></p>
         {% endblock %}
       </footer>
 

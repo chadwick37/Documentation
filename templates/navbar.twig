@@ -1,3 +1,7 @@
 <li><a href="{{ doc_root }}">Home</a></li>
-<li><a href="{{ doc_root }}/admin/add/0">Add New</a></li>
-<li><a href="{{ doc_root }}/admin">Admin</a></li>
+{% if user %}
+<li><a href="{{ doc_root }}/admin/add/0">Add New Article</a></li>
+<li><a href="{{ doc_root }}/admin">Admin Dashboard</a></li>
+<li><a href="{{ doc_root }}/admin/users/add">Add User</a></li>
+<li><a href="{{ doc_root }}/admin/users">Manage Users</a></li>
+{% endif %}

@@ -1,0 +1,28 @@
+{% extends "layout.twig" %}
+
+{% block page_title %}doc.umentation - Edit{% endblock %}
+
+{% block navbar %}
+	{% include 'navbar.twig' %}
+{% endblock %}
+
+{% block navlist %}
+	{% include 'navlist.twig' %}
+{% endblock %}
+
+{% block content %}
+<form action"{{ doc_root }}/admin/users/add" method="post">
+<fieldset>
+	<legend>Create User</legend>
+	<label>Username</label>
+	<input type="text" name="username" id="username" />
+	<label>Email</label>
+	<input type="text" name="email" id="email" />
+	<label>Passord</label>
+	<input type="password" name="password" id="password" />
+	<div class="form-actions">
+	<input type="submit" class="btn btn-primary" name="submit" value="Submit" />
+	</div>
+</fieldset>
+</form>
+{% endblock %}

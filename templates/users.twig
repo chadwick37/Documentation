@@ -1,0 +1,34 @@
+{% extends "layout.twig" %}
+
+{% block page_title %}doc.umentation - Edit{% endblock %}
+
+{% block navbar %}
+	{% include 'navbar.twig' %}
+{% endblock %}
+
+{% block navlist %}
+	{% include 'navlist.twig' %}
+{% endblock %}
+
+{% block content %}
+<h1>Manage Users</h1>
+<table class="table table-striped">
+	<thead>
+		<tr>
+		<th>Username</th>
+		<th>Email</th>
+		<th>Manage</th>
+		</tr>
+	</thead>
+	<tbody>
+	{% for u in users %}
+		<tr>
+		<td>{{ u.username }}</td>
+		<td>{{ u.email }}</td>
+		<td><a href="{{ doc_root }}/admin/users/edit/{{ u.id }}">Edit</a> | <a href="{{ doc_root }}/admin/users/delete/{{ u.id }}">Delete</a></td>
+		</tr>
+	{% endfor %}
+	</tbody>
+</table>
+{% endblock %}
+	

@@ -1,0 +1,35 @@
+{% extends "layout.twig" %}
+
+{% block page_title %}doc.umentation - Edit{% endblock %}
+
+{% block navbar %}
+	{% include 'navbar.twig' %}
+{% endblock %}
+
+{% block navlist %}
+	{% include 'navlist.twig' %}
+{% endblock %}
+
+{% block content %}
+{% if error %}
+<div class="alert alert-error">
+<button class="close" data-dismiss="alert"><i class="icon-remove-sign"></i></button>
+{{ error }}
+</div>
+{% endif %}
+<form action="{{ doc_root }}/admin/login" method="POST">
+<fieldset>
+<legend>Login</legend>
+  <label>Username:</label>
+  <input type="text" name="username" id="username" value="{{ username_value }}" /> 
+  <p class="text-error">{{ username_error }}</p>
+  <label>Password:</label> 
+  <input type="password" name="password" id="password" /> 
+  <p class="text-error">{{ password_error }}</p>
+  <div class="form-actions">
+  <input class="btn btn-primary" type="submit" value="Login" />
+  </div>
+</fieldset>
+</form>
+
+{% endblock %}

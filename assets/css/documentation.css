@@ -40,3 +40,7 @@ div[data-role="editor-toolbar"] {
 .child {
 	margin-left: 20px;
 }
+
+.main-content-area {
+	min-height: 500px;
+}

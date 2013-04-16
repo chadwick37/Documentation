@@ -1,9 +1,11 @@
 doc.umentation
 =============
 
-A simple application for building documentation for your app. Uses [Slim](http://www.slimframework.com/), [Paris/Idiorm](http://j4mie.github.io/idiormandparis/), [Twig](http://twig.sensiolabs.org/), and [Bootstrap v2.3.1](http://twitter.github.com/bootstrap).
+A super simple app for documenting your app. Think of doc.umentation as an easy way to generate the userguide you never have time to build. Now you do because doc.umentation makes it so easy.
 
-Why? There are other applications but I wanted something that can be setup and used within 5 minutes. Use doc.umentation when you don't need a full blown wiki or auto documentation.
+Why build doc.umentation? Because sometimes you need something quick and simple. It takes less than 5 minutes to setup and is super easy to use. If you don't need a full blown wiki or want the overhead of something like Wordpress, then doc.umentation may be for you.
+
+More information available on [doc.umentation.com](http://doc.umentation.com).
 
 ## Setup
 
@@ -29,7 +31,15 @@ You can use a different data type (such as TEXT) for the content field. We use l
 	  `order` int(11) NOT NULL,
 	  PRIMARY KEY (`id`)
 	) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=0 ;
-
+	
+	CREATE TABLE `users` (
+	  `id` int(11) NOT NULL AUTO_INCREMENT,
+	  `username` varchar(24) NOT NULL,
+	  `email` varchar(48) NOT NULL,
+	  `password` varchar(48) NOT NULL,
+	  PRIMARY KEY (`id`)
+	) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=0 ;
+	
 ## To Do
 
 * Add user authentication for admin area access
