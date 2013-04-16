@@ -60,7 +60,7 @@
             <p class="navbar-text pull-right">
               {% block loggedin %}
               {% if user %}
-              	Logged in as <a class="navbar-link" href="{{ doc_root }}/admin/edit/user/{{ userid }}">{{ user }}</a> | <a class="navbar-link" href="{{ doc_root }}/admin/logout">Logout</a>
+              	Logged in as <a class="navbar-link" href="{{ doc_root }}/admin/users/edit/{{ userid }}">{{ user }}</a> | <a class="navbar-link" href="{{ doc_root }}/admin/logout">Logout</a>
               {% else %}
               	<a class="navbar-link" href="{{ doc_root }}/admin/login">Log In</a>
               {% endif %}
