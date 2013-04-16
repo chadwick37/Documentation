@@ -40,6 +40,11 @@ You can use a different data type (such as TEXT) for the content field. We use l
 	  PRIMARY KEY (`id`)
 	) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=0 ;
 	
+This will create a default user with a username 'admin' and password 'password'
+	
+	INSERT INTO `users` (`id`, `username`, `email`, `password`) VALUES
+	(1, 'admin', 'admin@doc.umentation.com', '9b374a523bb94e6eea48522632bd2d90a713dd0f')
+	
 ## To Do
 
 * Add user authentication for admin area access
