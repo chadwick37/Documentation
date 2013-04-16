@@ -44,3 +44,11 @@ div[data-role="editor-toolbar"] {
 .main-content-area {
 	min-height: 500px;
 }
+
+@media(max-width:767px){
+   .affix {
+     position: static;
+     width: auto;
+     top: 0;
+    }
+}
