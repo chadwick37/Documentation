@@ -9,7 +9,7 @@
     <meta name="author" content="Chad Baron">
 
     <!-- Le styles -->
-    <link href="{{ doc_root }}/assets/css/bootstrap.css" rel="stylesheet">
+    <link href="{{ doc_root }}/assets/css/bootstrap.min.cerulean.css" rel="stylesheet">
     <style type="text/css">
       body {
         padding-top: 60px;
@@ -60,7 +60,7 @@
             <p class="navbar-text pull-right">
               {% block loggedin %}
               {% if user %}
-              	Logged in as {{ user }} | <a class="navbar-link" href="{{ doc_root }}/admin/logout">Logout</a>
+              	Logged in as <a class="navbar-link" href="{{ doc_root }}/admin/edit/user/{{ userid }}">{{ user }}</a> | <a class="navbar-link" href="{{ doc_root }}/admin/logout">Logout</a>
               {% else %}
               	<a class="navbar-link" href="{{ doc_root }}/admin/login">Log In</a>
               {% endif %}

@@ -82,10 +82,13 @@ $authenticate = function ($app) {
 
 $app->hook('slim.before.dispatch', function() use ($app) { 
    $user = null;
+   $userid = null;
    if (isset($_SESSION['user'])) {
       $user = $_SESSION['user'];
+      $userid = $_SESSION['userid'];
    }
    $app->view()->setData('user', $user);
+   $app->view()->setData('userid', $userid);
 });
 
 $app->view()->setData('doc_root', BASEDIR);
@@ -354,6 +357,7 @@ $app->post("/admin/login", function () use ($app) {
     }
 
     $_SESSION['user'] = $username;
+    $_SESSION['userid'] = $userlogin->id;
 
     $app->redirect(''.BASEDIR.'/admin');
 });

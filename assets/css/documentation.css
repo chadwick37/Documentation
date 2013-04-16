@@ -37,6 +37,10 @@ div[data-role="editor-toolbar"] {
   cursor: pointer;
 }
 
+.hide {
+	display: none;
+}
+
 .child {
 	margin-left: 20px;
 }

@@ -17,8 +17,28 @@ $(document).ready(function() {
 	
 	$('button#submit').click(function() {
 		var content = $('div#editor').html();
-		$('input#hide-content').attr('value', content);
+		$('textarea#hide-content').html(content);
 		$('form#add-article').submit();
+	});
+	
+	$('a#toggle-html').click(function() {
+		var content = $('div#editor').html();
+		$('textarea#hide-content').html(content);
+		$('div#wysiwyg').addClass('hide');
+		$('textarea#hide-content').removeClass('hide');
+		$('button#submit').attr('id', 'submit-html');
+		$('a#toggle-wysiwyg').removeClass('hide');
+	});
+	
+	$('button#submit-html').click(function() {
+		$('form#add-article').submit();
+	});
+	
+	$('a#toggle-wysiwyg').click(function() {
+		$('textarea#hide-content').addClass('hide');
+		$('a#toggle-wysiwyg').addClass('hide');
+		$('button#submit-html').attr('id', 'submit');
+		$('div#wysiwyg').removeClass('hide');
 	});
 	
 });
@@ -32,11 +52,12 @@ $(document).ready(function() {
     {% endif %}
 	    <label>Title</label>
 	    <input class="input-xxlarge" type="text" name="title" placeholder="add title">
-	    <label>Content</label>    
-	    <input id="hide-content" type="hidden" name="content" value="" />
+	    <label>Content</label>
+	    <a id="toggle-wysiwyg" class="btn hide" title="Toggle WYSIWYG">Toggle WYSIWYG Editor</a>    
+	    <textarea class="input-block-level hide" rows="12" id="hide-content" name="content"></textarea>
   </fieldset>
 </form>
-
+		<div id="wysiwyg">
 		  <div id="alerts"></div>
 		    <div class="btn-toolbar" data-role="editor-toolbar" data-target="#editor">
 		      <div class="btn-group">
@@ -93,13 +114,15 @@ $(document).ready(function() {
 					    <input class="" placeholder="Insert HTML" type="text" data-edit="inserthtml"/>
 					    <button class="btn" type="button">Insert</button>
 				    </div>
+{# 				    <a class="btn" id="toggle-html" title="Toggle HTML">Toggle HTML</a>  #}
 		      </div>
 		      <input type="text" data-edit="inserttext" id="voiceBtn" x-webkit-speech="">
 		    </div>
 		
 		    <div id="editor">
 		    </div>
-
+		  </div> {# end wysiwyg #}
+		  
 	    <div class="form-actions">
 	    <button id="submit" class="btn btn-primary" type="submit">Submit</button>
 	    </div>
