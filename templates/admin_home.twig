@@ -35,7 +35,11 @@ $(document).ready(function() {
 	<dl>
 	<div class="parent well row">
 	<div class="span3">
-		<dt>Title</dt>
+		<dt>Title
+		{% if p.publish == 0 %}
+			<span class="label label-warning">Draft</h1>
+		{% endif %}
+		</dt>
 		<dd><a href="{{ doc_root }}/read/{{ p.slug }}">{{ p.title }}</a></dd>
 		<dt>Slug</dt>
 		<dd>{{ p.slug }}</dd>
@@ -51,7 +55,11 @@ $(document).ready(function() {
 			{% for child in p.children %}
 			<div class="child well row">
 			<div class="span3">
-				<dt>Title</dt>
+				<dt>Title
+				{% if child.publish == 0 %}
+					<span class="label label-warning">Draft</span>
+				{% endif %}
+				</dt>
 				<dd><a href="{{ doc_root }}/read/{{ child.slug }}">{{ child.title }}</a></dd>
 				<dt>Slug</dt>
 				<dd>{{ child.slug }}</dd>

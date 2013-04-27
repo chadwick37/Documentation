@@ -97,6 +97,7 @@ $app->view()->setData('doc_root', BASEDIR);
 $app->get('/', function() use ($app) {
 	$articles = Model::factory('Articles')
 		->order_by_asc('order')
+		->where('publish', '1')
 		->find_many();
 	
 	$parents = getOrderedArticles($articles);
@@ -116,6 +117,7 @@ $app->get('/', function() use ($app) {
 $app->get('/read/:slug', function($slug) use ($app) {
 	$articles = Model::factory('Articles')
 		->order_by_asc('order')
+		->where('publish', '1')
 		->find_many();
 	
 	$parents = getOrderedArticles($articles);
@@ -153,10 +155,11 @@ $app->post('/admin/reorder', $authenticate($app), function() use ($app) {
     }
 });
  
-// Admin Add.
+// Article Add.
 $app->get('/admin/add/:parent_id', $authenticate($app), function($parent_id) use ($app) {
 	$articles = Model::factory('Articles')
 		->order_by_asc('order')
+		->where('publish', '1')
 		->find_many();
 	
 	$parents = getOrderedArticles($articles);
@@ -164,7 +167,7 @@ $app->get('/admin/add/:parent_id', $authenticate($app), function($parent_id) use
 	return $app->render('article_form.twig', array('parents' => $parents, 'parent_id' => $parent_id));
 });   
  
-// Admin Add - POST.
+// Article Add - POST.
 $app->post('/admin/add/:parent_id', $authenticate($app), function($parent_id) use ($app) {
 		
 	$slug = slug($app->request()->post('title'));
@@ -175,16 +178,18 @@ $app->post('/admin/add/:parent_id', $authenticate($app), function($parent_id) us
 	$article->content	= trim($app->request()->post('content'));
 	$article->timestamp = date('Y-m-d H:i:s');
 	$article->parent_id = $parent_id;
+	$article->publish 	= $app->request()->post('publish');
 
 	$article->save();
 	
 	$app->redirect(''.BASEDIR.'/admin');
 });
  
-// Admin Edit.
+// Article Edit.
 $app->get('/admin/edit/(:id)', $authenticate($app), function($id) use ($app) {
 	$articles = Model::factory('Articles')
 		->order_by_asc('order')
+		->where('publish', '1')
 		->find_many();
 	
 	$parents = getOrderedArticles($articles);
@@ -199,7 +204,7 @@ $app->get('/admin/edit/(:id)', $authenticate($app), function($id) use ($app) {
 	return $app->render('edit.twig', array('article' => $article, 'parents' => $parents));
 });
  
-// Admin Edit - POST.
+// Article Edit - POST.
 $app->post('/admin/edit/(:id)', $authenticate($app), function($id) use ($app) {
 	$article = Model::factory('Articles')->find_one($id);
 	if (! $article instanceof Articles) {
@@ -214,6 +219,7 @@ $app->post('/admin/edit/(:id)', $authenticate($app), function($id) use ($app) {
 	$article->title		= $app->request()->post('title');
 	$article->content	= trim($app->request()->post('content'));
 	$article->timestamp = date('Y-m-d H:i:s');
+	$article->publish	= $app->request()->post('publish');
 	$article->save();
 	
 	$app->redirect(''.BASEDIR.'/admin');
@@ -233,6 +239,7 @@ $app->get('/admin/delete/(:id)', $authenticate($app), function($id) use ($app) {
 $app->get('/admin/users', $authenticate($app), function() use ($app) {
 	$articles = Model::factory('Articles')
 		->order_by_asc('order')
+		->where('publish', '1')
 		->find_many();
 	
 	$parents = getOrderedArticles($articles);
@@ -245,6 +252,7 @@ $app->get('/admin/users', $authenticate($app), function() use ($app) {
 $app->get('/admin/users/add', $authenticate($app), function() use ($app) {
 	$articles = Model::factory('Articles')
 		->order_by_asc('order')
+		->where('publish', '1')
 		->find_many();
 	
 	$parents = getOrderedArticles($articles);
@@ -255,6 +263,7 @@ $app->get('/admin/users/add', $authenticate($app), function() use ($app) {
 $app->get('/admin/users/edit/(:id)', $authenticate($app), function($id) use ($app) {
 	$articles = Model::factory('Articles')
 		->order_by_asc('order')
+		->where('publish', '1')
 		->find_many();
 	
 	$parents = getOrderedArticles($articles);
@@ -307,6 +316,7 @@ $app->post('/admin/users/delete/(:id)', $authenticate($app), function($id) use (
 $app->get('/admin/login', function() use ($app) {
 	$articles = Model::factory('Articles')
 		->order_by_asc('order')
+		->where('publish', '1')
 		->find_many();
 	
 	$parents = getOrderedArticles($articles);	$flash = $app->view()->getData('flash');

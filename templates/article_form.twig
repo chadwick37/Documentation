@@ -9,9 +9,21 @@
 {% endblock %}
 
 {% block content %}
+<link rel="stylesheet" href="{{ doc_root }}/assets/css/bootstrapSwitch.css">
+<script src="{{ doc_root }}/assets/js/bootstrapSwitch.js"></script>
 <script type="text/javascript" charset="utf-8">
 $(document).ready(function() {
 	$('#editor').wysiwyg();
+	
+	$('#publish-switch').on('switch-change', function (e, data) {
+    	var value = data.value;
+    	if (value == true) {
+    		$('input#publish').attr('value', '1');
+    	} else if (value == false) {
+    		$('input#publish').attr('value', '0');
+    	}
+      	console.log(value);
+    });
 	
 	$('button#submit').click(function() {
 		var content = $('div#editor').html();
@@ -53,6 +65,7 @@ $(document).ready(function() {
 	    <label>Content</label>
 	    <a id="toggle-wysiwyg" class="btn hide" title="Toggle WYSIWYG">Toggle WYSIWYG Editor</a>    
 	    <textarea class="input-block-level hide" rows="12" id="hide-content" name="content"></textarea>
+	    <input id="publish" type="hidden" name="publish" value="1">
   </fieldset>
 </form>
 		<div id="wysiwyg">
@@ -120,7 +133,10 @@ $(document).ready(function() {
 		    <div id="editor">
 		    </div>
 		  </div> {# end wysiwyg #}
-		  
+		<h5>Status</h5>  
+		<div id="publish-switch" class="switch" data-on-label="Publish" data-off-label="Draft" data-on="success" data-off="warning">
+			<input type="checkbox" checked="checked">
+    	</div>  
 	    <div class="form-actions">
 	    <button id="submit" class="btn btn-primary" type="submit">Submit</button>
 	    </div>
