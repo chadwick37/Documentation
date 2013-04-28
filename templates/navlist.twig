@@ -1,5 +1,4 @@
 {% if parents %}
-	<li class="nav-header">Features</li>
 	{% for p in parents %}
 		<li><a href="{{ doc_root }}/read/{{ p.slug }}">{{ p.title }}</a>
 			{% if p.children %}
