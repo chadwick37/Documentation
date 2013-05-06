@@ -48,6 +48,7 @@ This will create a default user with a username 'admin' and password 'password'
 	
 ## To Do
 
+* Add toggle HTML to WYSIWYG editor
 * Add composer for dependency management.
 * Add server side image processing.
-* Create a setup and configuration (probably via a flat json file) to control various aspects of the site (like language). For example, the word FEATURES over the navigation on the left. Potentially doc.umentation could be used for other purposes.
+* Create a setup and configuration (probably via a flat json file) to control various aspects of the site (like language).
